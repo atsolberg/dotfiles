@@ -20,51 +20,51 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 # Aaron's Customizations                                                       #
 ###############################################################################
 
-echo "Hello $(whoami)! Let's get you set up."
+printf "Hello $(whoami)! Let's get you set up.\n"
 
-echo "mkdir -p $(HOME)/code"
+printf "mkdir -p $(HOME)/code\n"
 mkdir -p "$(HOME)/code"
 
-echo "installing homebrew"
+printf "installing homebrew\n"
 # install homebrew https://brew.sh
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-echo "brew installing stuff"
+printf "brew installing stuff\n"
 # hub: a github-specific version of git
 # ripgrep: rg is faster than alternatives
 # tree: really handy for listing out directories in text
 # bat: A cat(1) clone with syntax highlighting and Git integration.
 brew install git hub ripgrep bash-completion watchman tree bat
 
-echo "installing node (via n-install)"
+printf "installing node (via n-install)\n"
 curl -L https://git.io/n-install | bash
 
-echo "node --version: $(node --version)"
-echo "npm --version: $(npm --version)"
+printf "node --version: $(node --version)\n"
+printf "npm --version: $(npm --version)\n"
 
-echo "installing a few global npm packages"
+printf "installing a few global npm packages\n"
 npm install --global serve diff-so-fancy fkill-cli npm-quick-run semantic-release-cli
 
-echo "installing apps with brew cask"
+printf "installing apps with brew cask\n"
 brew cask install alfred google-chrome firefox brave-browser divvy \
 google-drive-file-stream visual-studio-code \
 virtualbox skype \
 qlcolorcode qlmarkdown qlstephen quicklook-json webpquicklook \
 suspicious-package qlvideo
 
-echo "Generating an RSA token for GitHub"
+printf "Generating an RSA token for GitHub\n"
 mkdir -p ~/.ssh
 ssh-keygen -t rsa -b 4096 -C "atsolberg@gmail.com"
 echo "Host *\n AddKeysToAgent yes\n UseKeychain yes\n IdentityFile ~/.ssh/id_rsa" | tee ~/.ssh/config
 eval "$(ssh-agent -s)"
 echo "run 'pbcopy < ~/.ssh/id_rsa.pub' and paste that into GitHub"
 
-echo "cloning dotfiles"
+printf "cloning dotfiles\n"
 git clone git@github.com:atsolberg/dotfiles.git "${HOME}/dotfiles"
 ln -s "${HOME}/dotfiles/.bash_profile" "${HOME}/.bash_profile"
 ln -s "${HOME}/dotfiles/.gitignore_global" "${HOME}/.gitignore_global"
 
-echo "making system modifications:"
+printf "making system modifications:\n"
 
 # Make Chrome Two finger swipe for back and forward
 # defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool TRUE
@@ -398,8 +398,8 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 # Enable highlight hover effect for the grid view of a stack (Dock)
 defaults write com.apple.dock mouse-over-hilite-stack -bool true
 
-# Set the icon size of Dock items to 16 pixels
-defaults write com.apple.dock tilesize -int 16
+# Set the icon size of Dock items to 52 pixels
+defaults write com.apple.dock tilesize -int 52
 
 # Change minimize/maximize window effect
 defaults write com.apple.dock mineffect -string "scale"
@@ -855,7 +855,7 @@ for app in "Activity Monitor" \
   "iCal"; do
   killall "${app}" &> /dev/null
 done
-echo "Done. Note that some of these changes require a logout/restart to take effect."
+printf "Done.\nNote that some of these changes require a logout/restart to take effect.\n"
 
 
 printf "TODO:\n\
