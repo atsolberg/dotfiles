@@ -1,6 +1,9 @@
 # Add bin and sbin to PATH
 PATH=$PATH:/usr/local/bin:/usr/local/sbin
 
+# SSH stuff
+alias addkey='ssh-add -K ~/.ssh/id_rsa'
+
 # More useful ls
 alias ls='ls -ll'
 
